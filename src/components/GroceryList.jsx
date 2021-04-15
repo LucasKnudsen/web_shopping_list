@@ -4,6 +4,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Delete from '@material-ui/icons/DeleteOutlined'
 import Icon from '@material-ui/core/Icon';
 import { IconButton, TextField } from '@material-ui/core';
+import { motion, AnimatePresence } from 'framer-motion'
+import { listVariants, staggerVariants } from '../modules/animations'
 
 const GroceryList = () => {
   const [groceries, setGroceries] = useState([])
@@ -14,38 +16,34 @@ const GroceryList = () => {
     fetchGroceries(setGroceries)
   }, [update])
 
-  const addNewItem = async () => {
-    await addGrocery(input)
-    setUpdate(!update)
-  }
-
-  const deleteItem = async (id) => {
-    await deleteGrocery(id)
-    setUpdate(!update)
-  }
-
   return (
     <>
       <form style={styles.input}>
         <TextField color='secondary' label="Hvaaa skal vi have?" value={input} onChange={(e) => setInput(e.target.value)} />
-        <IconButton color='secondary' onClick={addNewItem}>
+        <IconButton color='secondary' onClick={() => addGrocery(input, setUpdate, update)}>
           <Icon>add_circle</Icon>
         </IconButton>
       </form>
-      <ul style={styles.listContainer}>
-        {groceries.map(item => {
-          return (
-            <li key={item.id} style={styles.grocery}>
-              <div style={{ display: 'flex', alignItems: 'center', }}>
-                <Checkbox />
-                <p>{item.name}</p>
-              </div>
-              <Delete style={{ padding: 10, cursor: 'pointer' }} onClick={() => deleteItem(item.id)} />
-            </li>
-          )
-        }).reverse()
-        }
-      </ul>
+      <AnimatePresence>
+        <motion.ul style={styles.listContainer} variants={staggerVariants}
+          initial='initial' animate='animate' exit='exit'
+        >
+          {groceries.map(item => {
+            return (
+              <motion.li key={item.id} style={styles.grocery}
+                variants={listVariants}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', }}>
+                  <Checkbox />
+                  <p>{item.name}</p>
+                </div>
+                <Delete style={{ padding: 10, cursor: 'pointer' }} onClick={() => deleteGrocery(item.id, setUpdate, update)} />
+              </motion.li>
+            )
+          }).reverse()
+          }
+        </motion.ul>
+      </AnimatePresence>
     </>
   )
 }

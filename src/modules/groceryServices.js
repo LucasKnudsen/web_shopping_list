@@ -7,15 +7,17 @@ const fetchGroceries = async (setGroceries) => {
   setGroceries(response.data.groceries)
 }
 
-const addGrocery = async (value) => {
+const addGrocery = async (value, setUpdate, update) => {
   if (!value) {
     return
   }
   await axios.post('/groceries', { name: value })
+  setUpdate(!update)
 }
 
-const deleteGrocery = async (id) => {
+const deleteGrocery = async (id, setUpdate, update) => {
   await axios.delete(`/groceries/${id}`)
+  setUpdate(!update)
 }
 
 export { fetchGroceries, addGrocery, deleteGrocery }
