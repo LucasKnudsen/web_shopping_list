@@ -66,7 +66,8 @@ const styles = {
   },
   input: {
     textAlign: 'center',
-    margin: '25px 0'
+    margin: '25px 0',
+    flex: 1,
 
   }
 }

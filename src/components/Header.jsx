@@ -3,7 +3,7 @@ import React from 'react'
 const Header = () => {
   return (
     <div style={styles.headerContainer}>
-      <h1 data-cy="header" >Knudsens Indkøb</h1>
+      <h1 data-cy="header" style={styles.header}>Knudsens Indkøb</h1>
     </div>
   )
 }
@@ -15,5 +15,9 @@ const styles = {
     textAlign: 'center',
     padding: '50px 0',
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: '11vw'
   }
 }
