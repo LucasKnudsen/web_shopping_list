@@ -1,11 +1,10 @@
-import { Container } from '@material-ui/core'
 import React from 'react'
 
 const Header = () => {
   return (
-    <Container maxWidth={false} style={styles.headerContainer}>
+    <div style={styles.headerContainer}>
       <h1 data-cy="header" >Knudsens Indkøb</h1>
-    </Container>
+    </div>
   )
 }
 
